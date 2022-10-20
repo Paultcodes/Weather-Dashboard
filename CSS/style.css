@@ -15,10 +15,11 @@ body {
 }
 
 input {
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
-  height: 30px;
+  height: 40px;
   margin-top: 20px;
+  padding: 10px;
 }
 
 .search-button {
@@ -28,14 +29,31 @@ input {
   background-color: rgb(55, 130, 243);
   height: 30px;
   cursor: pointer;
+  color: white;
+}
+
+.search-button:hover {
+  background-color: rgb(7, 103, 248);
+
+}
+
+.search-section h2 {
+  color: rgb(0, 0, 0);
 }
 
 .current-result {
   border: 1px solid;
+  background-color: rgb(243, 188, 117);
   width: 1200px;
   height: 200px;
   padding: 10px;
   margin-top: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.current-result p {
+  margin-top: 20px;
+
 }
 
 .main-container {
@@ -55,6 +73,7 @@ input {
   flex-direction: column;
   margin-right: 50px;
   margin-left: 30px;
+  margin-top: 20px;
 }
 
 .fiveday-results {
