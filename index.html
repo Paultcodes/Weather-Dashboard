@@ -1,50 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Dashboard</title>
-    <link rel="stylesheet" href="/CSS/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/CSS/style.css" />
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+    ></script>
+  </head>
+  <body>
     <nav class="navbar">
-        <h1 class="logo">Weather Dashboard</h1>
+      <h1 class="logo">Weather Dashboard</h1>
     </nav>
     <div class="main-container">
-        <div class="search-section">
-            <h2>SEARCH FOR A CITY:</h2>
-            <input class="search-input" type="text">
-            <button class="search-button">Search</button>
-            <div class="search-history">
-
-            </div>
-
+      <div class="search-section">
+        <h2>SEARCH FOR A CITY:</h2>
+        <input class="search-input" type="text" />
+        <button class="search-button">Search</button>
+        <div class="search-history">
+          
         </div>
-        <div class="results">
-            <div class="current-result">
-                <h1 class="current-city">Atlanta</h1>
-                <p class="current-temp">Temp: 76</p>
-                <p class="current-wind">Wind: 39</p>
-                <p class="current-humidity">Humidity: 44</p>
-
-            </div>
-            <div class="five-day">
-                <div class="fiveday-header">
-                    <h3 class="header-fiveday">5 Day Forecast:</h3>
-                </div>
-                <div class="fiveday-results">
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
-                    <h1>Hello</h1>
-                </div>
-
-            </div>
-
+      </div>
+      <div class="results">
+        <div class="current-result">
+          <div class="title">
+            <h1 class="current-city"></h1>
+            <div class="weather-icon"><img src="" /></div>
+          </div>
+          <p class="current-temp"></p>
+          <p class="current-wind"></p>
+          <p class="current-humidity"></p>
         </div>
+        <div class="five-day">
+          <div class="fiveday-header">
+            <h3 class="header-fiveday">5 Day Forecast:</h3>
+          </div>
+          <div class="fiveday-results">
+            <div class="box">
+              <h1 class="date-one">Hekk</h1>
+              <div class="weather-icon-one"><img src="" /></div>
+              <p class="temp-one">ef</p>
+              <p class="wind-one">ef</p>
+              <p class="hum-one">ef</p>
+            </div>
+            <div class="box">
+              <h1 class="date-two">Hewllo</h1>
+              <div class="weather-icon-two"><img src="" /></div>
+              <p class="temp-two">ee</p>
+              <p class="wind-two">ee</p>
+              <p class="hum-two">ee</p>
+            </div>
+            <div class="box">
+              <h1 class="date-one">gewg</h1>
+              <div class="weather-icon-one"><img src="" /></div>
+              <p class="temp-one">eg</p>
+              <p class="wind-one">eg</p>
+              <p class="hum-one">eg</p>
+            </div>
+            <div class="box">
+              <h1 class="date-one">eg</h1>
+              <div class="weather-icon-one"><img src="" /></div>
+              <p class="temp-one">egge</p>
+              <p class="wind-one">eg</p>
+              <p class="hum-one">erer</p>
+            </div>
+            <div class="box">
+              <h1 class="date-one">ererr</h1>
+              <div class="weather-icon-one"><img src="" /></div>
+              <p class="temp-one">erer</p>
+              <p class="wind-one">erer</p>
+              <p class="hum-one">erer</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="/JS/script.js"></script>
-</body>
+  </body>
 </html>
