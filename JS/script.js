@@ -120,11 +120,63 @@ function displayForecast(forecast) {
   var icon = forecast.list[4].weather[0].icon;
   weatherIcon.innerHTML = `<img src="images/${icon}.png">`;
   var tempOne = document.querySelector(".temp-one");
-  tempOne.textContent = "Temp: " + forecast.list[4].main.temp + "°F";
+  tempOne.textContent = "Temp: " + forecast.list[4].main.temp_max + "°F";
   var windOne = document.querySelector(".wind-one");
   windOne.textContent = "Wind: " + forecast.list[4].wind.speed + " MPH";
   humOne = document.querySelector(".hum-one");
   humOne.textContent = "Humidity: " + forecast.list[4].main.humidity + "%";
+
+  var dateTwo = document.querySelector(".date-two");
+  var twoDate = forecast.list[12].dt;
+  dateTwo.textContent = moment.unix(twoDate).format("MM-DD-YYYY");
+  var weatherIconTwo = document.querySelector(".weather-icon-two");
+  var iconTwo = forecast.list[12].weather[0].icon;
+  weatherIconTwo.innerHTML = `<img src="images/${iconTwo}.png">`;
+  var tempTwo = document.querySelector(".temp-two");
+  tempTwo.textContent = "Temp: " + forecast.list[10].main.temp_max + "°F";
+  var windTwo = document.querySelector(".wind-two");
+  windTwo.textContent = "Wind: " + forecast.list[10].wind.speed + " MPH";
+  humTwo = document.querySelector(".hum-two");
+  humTwo.textContent = "Humidity: " + forecast.list[10].main.humidity + "%";
+
+  var dateThree = document.querySelector(".date-three");
+  threeDate = forecast.list[19].dt;
+  dateThree.textContent = moment.unix(threeDate).format("MM-DD-YYYY");
+  var weatherIconThree = document.querySelector(".weather-icon-three");
+  var iconThree = forecast.list[19].weather[0].icon;
+  weatherIconThree.innerHTML = `<img src="images/${iconThree}.png">`;
+  var tempThree = document.querySelector(".temp-three");
+  tempThree.textContent = "Temp: " + forecast.list[19].main.temp_max + "°F";
+  var windThree = document.querySelector(".wind-three");
+  windThree.textContent = "Wind: " + forecast.list[19].wind.speed + " MPH";
+  humThree = document.querySelector(".hum-three");
+  humThree.textContent = "Humidity: " + forecast.list[19].main.humidity + "%";
+
+  var dateFour = document.querySelector(".date-four");
+  fourDate = forecast.list[27].dt;
+  dateFour.textContent = moment.unix(fourDate).format("MM-DD-YYYY");
+  var weatherIconFour = document.querySelector(".weather-icon-four");
+  var iconFour = forecast.list[26].weather[0].icon;
+  weatherIconFour.innerHTML = `<img src="images/${iconFour}.png">`;
+  var tempFour = document.querySelector(".temp-four");
+  tempFour.textContent = "Temp: " + forecast.list[26].main.temp_max + "°F";
+  var windFour = document.querySelector(".wind-four");
+  windFour.textContent = "Wind: " + forecast.list[26].wind.speed + " MPH";
+  humFour = document.querySelector(".hum-four");
+  humFour.textContent = "Humidity: " + forecast.list[26].main.humidity + "%";
+
+  var dateFive = document.querySelector(".date-five");
+  fiveDate = forecast.list[35].dt;
+  dateFive.textContent = moment.unix(fiveDate).format("MM-DD-YYYY");
+  var weatherIconFive = document.querySelector(".weather-icon-five");
+  var iconFive = forecast.list[35].weather[0].icon;
+  weatherIconFive.innerHTML = `<img src="images/${iconFive}.png">`;
+  var tempFive = document.querySelector(".temp-five");
+  tempFive.textContent = "Temp: " + forecast.list[35].main.temp_max + "°F";
+  var windFive = document.querySelector(".wind-five");
+  windFive.textContent = "Wind: " + forecast.list[35].wind.speed + " MPH";
+  humFive = document.querySelector(".hum-five");
+  humFive.textContent = "Humidity: " + forecast.list[35].main.humidity + "%";
 }
 
 var searchHistory = document.querySelector(".search-history");
@@ -137,9 +189,21 @@ function showHistory() {
     const localHistory = check[i];
 
     var buttonHis = document.createElement("button");
+    buttonHis.classList.add("btn");
+    buttonHis.style.cursor = "pointer";
     buttonHis.textContent = localHistory;
 
     searchHistory.appendChild(buttonHis);
+  }
+  var historyButton = document.getElementsByClassName("btn");
+
+  for (let i = 0; i < historyButton.length; i++) {
+    historyButton[i].addEventListener("click", function (show) {
+      show = historyButton[i].textContent;
+      console.log(show);
+      getHistory(show);
+      console.log("hello");
+    });
   }
 }
 
@@ -173,3 +237,30 @@ searchButton.addEventListener("click", function (event) {
 });
 
 init();
+
+var getHistory = function (search) {
+  // var apiKey = "da38c3717cba28733148c29d9be5547d";
+  // var city = searchInput.value;
+  console.log(search);
+
+  var apiUrl =
+    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    search +
+    "&limit=1&appid=da38c3717cba28733148c29d9be5547d";
+
+  fetch(apiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        response.json().then(function (hisLon) {
+          console.log(hisLon[0].lat, hisLon[0].lon);
+          searchLatLon(hisLon[0].lat, hisLon[0].lon);
+          searchForecast(hisLon[0].lat, hisLon[0].lon);
+        });
+      } else {
+        alert("Error: " + response.statusText);
+      }
+    })
+    .catch(function (error) {
+      alert("Unable to connect to WeatherService");
+    });
+};
