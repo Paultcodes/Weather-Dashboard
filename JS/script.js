@@ -9,7 +9,7 @@ var getLonLat = function (city) {
   var city = searchInput.value;
 
   var apiUrl =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    "https://api.openweathermap.org/geo/1.0/direct?q=" +
     city +
     "&limit=1&appid=da38c3717cba28733148c29d9be5547d";
 
@@ -225,7 +225,7 @@ init();
 //searches the weather when user clicks on one of the search history buttons
 var getHistory = function (search) {
   var apiUrl =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    "https://api.openweathermap.org/geo/1.0/direct?q=" +
     search +
     "&limit=1&appid=da38c3717cba28733148c29d9be5547d";
 
