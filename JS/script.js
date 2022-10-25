@@ -4,8 +4,8 @@ var searchInput = document.querySelector(".search-input");
 
 var today = moment();
 
+// Searches the users input and gets the lat and lon values
 var getLonLat = function (city) {
-  // var apiKey = "da38c3717cba28733148c29d9be5547d";
   var city = searchInput.value;
 
   var apiUrl =
@@ -17,7 +17,6 @@ var getLonLat = function (city) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (lonLat) {
-          console.log(lonLat[0].lat, lonLat[0].lon);
           searchLatLon(lonLat[0].lat, lonLat[0].lon);
           searchForecast(lonLat[0].lat, lonLat[0].lon);
         });
@@ -31,9 +30,8 @@ var getLonLat = function (city) {
 };
 
 searchButton.addEventListener("click", getLonLat);
-
+//Searches the lat and lon from the users input
 var searchLatLon = function (lat, lon) {
-  // var city = searchInput.value;
   var latData = lat;
   var lonData = lon;
 
@@ -48,8 +46,6 @@ var searchLatLon = function (lat, lon) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (weather) {
-          console.log(weather);
-          // console.log(weather.list[0].wind.speed);
           displayWeather(weather);
         });
       } else {
@@ -61,12 +57,8 @@ var searchLatLon = function (lat, lon) {
     });
 };
 
-//weather.city.name
-
-//
-
+//Displays current weather for the location the user searched for
 function displayWeather(info) {
-  console.log(info);
   var currentCity = document.querySelector(".current-city");
   currentCity.textContent = info.name + today.format(" (MM-DD-YYYY)");
   var weatherIcon = document.querySelector(".weather-icon");
@@ -78,11 +70,9 @@ function displayWeather(info) {
   currentWind.textContent = "Wind: " + info.wind.speed + " MPH";
   var currentHumidity = document.querySelector(".current-humidity");
   currentHumidity.textContent = "Humidity: " + info.main.humidity + "%";
-  // console.log(icon);
 }
 
 var searchForecast = function (lat, lon) {
-  // var city = searchInput.value;
   var latData = lat;
   var lonData = lon;
 
@@ -97,8 +87,6 @@ var searchForecast = function (lat, lon) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (weather) {
-          console.log(weather);
-          // console.log(weather.list[0].wind.speed);
           displayForecast(weather);
         });
       } else {
@@ -109,15 +97,14 @@ var searchForecast = function (lat, lon) {
       alert("Unable to connect to WeatherService");
     });
 };
-
+//Displays forecast on the screen
 function displayForecast(forecast) {
-  console.log(forecast);
   var dateOne = document.querySelector(".date-one");
   var oneDate = forecast.list[4].dt;
-  console.log(oneDate);
+
   dateOne.textContent = moment.unix(oneDate).format("MM-DD-YYYY");
   var weatherIcon = document.querySelector(".weather-icon-one");
-  var icon = forecast.list[4].weather[0].icon;
+  var icon = forecast.list[6].weather[0].icon;
   weatherIcon.innerHTML = `<img src="images/${icon}.png">`;
   var tempOne = document.querySelector(".temp-one");
   tempOne.textContent = "Temp: " + forecast.list[4].main.temp_max + "°F";
@@ -130,7 +117,7 @@ function displayForecast(forecast) {
   var twoDate = forecast.list[12].dt;
   dateTwo.textContent = moment.unix(twoDate).format("MM-DD-YYYY");
   var weatherIconTwo = document.querySelector(".weather-icon-two");
-  var iconTwo = forecast.list[12].weather[0].icon;
+  var iconTwo = forecast.list[14].weather[0].icon;
   weatherIconTwo.innerHTML = `<img src="images/${iconTwo}.png">`;
   var tempTwo = document.querySelector(".temp-two");
   tempTwo.textContent = "Temp: " + forecast.list[10].main.temp_max + "°F";
@@ -143,7 +130,7 @@ function displayForecast(forecast) {
   threeDate = forecast.list[19].dt;
   dateThree.textContent = moment.unix(threeDate).format("MM-DD-YYYY");
   var weatherIconThree = document.querySelector(".weather-icon-three");
-  var iconThree = forecast.list[19].weather[0].icon;
+  var iconThree = forecast.list[22].weather[0].icon;
   weatherIconThree.innerHTML = `<img src="images/${iconThree}.png">`;
   var tempThree = document.querySelector(".temp-three");
   tempThree.textContent = "Temp: " + forecast.list[19].main.temp_max + "°F";
@@ -156,7 +143,7 @@ function displayForecast(forecast) {
   fourDate = forecast.list[27].dt;
   dateFour.textContent = moment.unix(fourDate).format("MM-DD-YYYY");
   var weatherIconFour = document.querySelector(".weather-icon-four");
-  var iconFour = forecast.list[26].weather[0].icon;
+  var iconFour = forecast.list[30].weather[0].icon;
   weatherIconFour.innerHTML = `<img src="images/${iconFour}.png">`;
   var tempFour = document.querySelector(".temp-four");
   tempFour.textContent = "Temp: " + forecast.list[26].main.temp_max + "°F";
@@ -169,7 +156,7 @@ function displayForecast(forecast) {
   fiveDate = forecast.list[35].dt;
   dateFive.textContent = moment.unix(fiveDate).format("MM-DD-YYYY");
   var weatherIconFive = document.querySelector(".weather-icon-five");
-  var iconFive = forecast.list[35].weather[0].icon;
+  var iconFive = forecast.list[38].weather[0].icon;
   weatherIconFive.innerHTML = `<img src="images/${iconFive}.png">`;
   var tempFive = document.querySelector(".temp-five");
   tempFive.textContent = "Temp: " + forecast.list[35].main.temp_max + "°F";
@@ -182,7 +169,7 @@ function displayForecast(forecast) {
 var searchHistory = document.querySelector(".search-history");
 
 var check = [];
-
+//Creates a button for each string inside of the check array and then acts as the users search history
 function showHistory() {
   searchHistory.innerHTML = "";
   for (let i = 0; i < check.length; i++) {
@@ -200,9 +187,8 @@ function showHistory() {
   for (let i = 0; i < historyButton.length; i++) {
     historyButton[i].addEventListener("click", function (show) {
       show = historyButton[i].textContent;
-      console.log(show);
+
       getHistory(show);
-      console.log("hello");
     });
   }
 }
@@ -233,16 +219,11 @@ searchButton.addEventListener("click", function (event) {
   searchInput.value = "";
   storeHistory();
   showHistory();
-  console.log(check);
 });
 
 init();
-
+//searches the weather when user clicks on one of the search history buttons
 var getHistory = function (search) {
-  // var apiKey = "da38c3717cba28733148c29d9be5547d";
-  // var city = searchInput.value;
-  console.log(search);
-
   var apiUrl =
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
     search +
@@ -252,7 +233,6 @@ var getHistory = function (search) {
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (hisLon) {
-          console.log(hisLon[0].lat, hisLon[0].lon);
           searchLatLon(hisLon[0].lat, hisLon[0].lon);
           searchForecast(hisLon[0].lat, hisLon[0].lon);
         });
